@@ -138,7 +138,7 @@ body {
 }
 
 .chat-pane {
-  flex: 0 0 50%;
+  flex: 0 0 100%;
   height: calc(100% - 70px);
   padding: 10px;
 }
@@ -162,7 +162,7 @@ body {
 }
 
 #dave {
-  background-color: pink;
+  background-color: #000000;
 }
 
 /* ==========================================================================
