@@ -23,6 +23,7 @@ chatInput.addEventListener("keydown", function (e) {
 // Adding user-entered chat to main div
 function appendMessage(chatMessage) {
 	fullChat.innerHTML += `<div class="user-message"><p>${currentValue}</p></div>`;
+	fullChat.scrollTop = fullChat.scrollHeight;
 }
 
 // Cleaning up format for typewriter effect
@@ -31,70 +32,65 @@ function cleanFormat() {
 	botMessage.classList.remove("typewriter");
 }
 
+// Responder function to set timer and add response
+function responder(botResponse, time = 500) {
+	setTimeout(function() { 
+  		fullChat.innerHTML += botResponse;
+		fullChat.scrollTop = fullChat.scrollHeight;
+  	}, time);
+}
+
 // create a function to respond to user messages with variable logic based upon inputs
 function botResponse() {
 	if (messageNumber === 0) {
 
-		setTimeout(function(){ 
-			fullChat.innerHTML += 
-				`<div class="bot-message typewriter">
-					<p>Hey, that's funny! ${currentValue} is my name, too! What city do you live in?</p>
-				</div>`; 
-		}, 500);
+		responder(`<div class="bot-message typewriter"><p>Hey, that's funny! ${currentValue} is my name, too! What city do you live in?</p></div>`);
 	
 	} else if (messageNumber === 1) {
 
 		cleanFormat();
-		setTimeout(function(){ 
-			fullChat.innerHTML += 
-				`<div class="bot-message typewriter">
-					<p>Weird, I live in ${currentValue} too. What part of town?</p>
-				</div>`;
-		}, 500);
+		responder(`<div class="bot-message typewriter"><p>Even weirder, I live in ${currentValue} too. What part of town?</p></div>`);
+
 
 	} else if (messageNumber === 2) {
 
 		cleanFormat();
-		setTimeout(function(){ 
-			fullChat.innerHTML += 
-				`<div class="bot-message typewriter">
-					<p>Yup, that's my neighborhood. This is kind of making me nervous. You are real, right?</p>
-				</div>`;
-		}, 500);
+		responder(`<div class="bot-message typewriter"><p>Yup, that's my neighborhood. This is kind of making me nervous. You are real, right?</p></div>`);
 
 	} else if (messageNumber === 3) {
 
 		cleanFormat();
-		setTimeout(function(){ 
-			fullChat.innerHTML += 
-				`<div class="bot-message typewriter">
-					<p>Weird question, but have you felt like someone is watching you lately?</p>
-				</div>`;
-		}, 500);
+		responder(`<div class="bot-message typewriter"><p>Weird question, but have you felt like someone is watching you lately?</p></div>`);
 
 	} else if (messageNumber === 4) {
 
-		if (['yes', 'Yes', 'yup', 'Yup', 'Yeah', 'yeah'].indexOf(currentValue) >= 0) {
+		if (['yes', 'Yes', 'yup', 'Yup', 'Yeah', 'yeah', 'yea', 'Yea', 'uh huh', 'Uh huh'].indexOf(currentValue) >= 0) {
+
 			cleanFormat();
-			setTimeout(function(){ 
-				fullChat.innerHTML += 
-					`<div class="bot-message typewriter">
-						<p>Me too!</p>
-					</div>`;
-			}, 500);
-		}	else {
+			responder(`<div class="bot-message typewriter"><p>Me too! I've been getting terrible headaches and thought I might be going crazy.</p></div>`);
+			setTimeout(function() { 
+  				cleanFormat();
+  			}, 4000);
+			responder(`<div class="mod-message"><p>Hi, this is an eCorp moderator! This appears to be an unauthorized use of this program.</p></div>`, 4000);
+
+		} else {
+
 			cleanFormat();
-			setTimeout(function(){ 
-				fullChat.innerHTML += 
-					`<div class="bot-message typewriter">
-						<p>Must just be me.</p>
-					</div>`;
-			}, 500);
+			responder(`<div class="bot-message typewriter"><p>Must just be me. I wonder if it's related to these headaches I've been getting.</p></div>`);
+			setTimeout(function() { 
+  				cleanFormat();
+  			}, 4000);
+			responder(`<div class="mod-message"><p>Hi, this is an eCorp moderator! This appears to be an unauthorized use of this program.</p></div>`, 4000);
+
 		}
 
 	}
 
 }
+
+// Reformat everything to be in smaller reusable functions with an array of responses?
+// function botResponse();
+// Write code to test if username is in list of class members, say others have been arrested or something. Have moderator talking to chat bot?
 
 // create a function for HAL to open the chat with "Good morning, Dave"
 

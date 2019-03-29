@@ -146,6 +146,7 @@ body {
   font-family: 'IBM Plex Mono', monospace;
   background: #eee;
   border: 10px solid black;
+  overflow: scroll;
 }
 
 .chat-input {
@@ -168,11 +169,19 @@ body {
   background: #ccc;
   padding: 2px 20px;
   color: #000;
+  text-align: right;
+  border-radius: 10px;
 }
 
 .bot-message {
-    padding: 2px 20px;
-    color: #000;
+  padding: 2px 20px;
+  color: #000;
+}
+
+.mod-message {
+  background: #FF0000;
+  padding: 2px 20px;
+  color: #000;
 }
 
 
@@ -180,7 +189,7 @@ body {
 
 
 
-/*TYPEWRITER EFFECT - I took this from Geoff Graham on CSS-Tricks.com and modified for my purposes*/
+/* TYPEWRITER EFFECT - I took this from Geoff Graham on CSS-Tricks.com and modified it */
 
 /* GLOBAL STYLES */
 /*body {
@@ -204,7 +213,7 @@ div.typewriter {
   /*letter-spacing: .15em; /* Adjust as needed */
   /*margin-top: 0;*/
   animation: 
-    typing 3.5s steps(25, end),
+    typing 2.5s steps(25, end),
     blink-caret .5s step-end infinite;
 }
 
