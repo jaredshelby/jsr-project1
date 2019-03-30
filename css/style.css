@@ -105,7 +105,7 @@ html, body {
 
 body {
   background: url(../images/corp-stock2.jpg);
-  background-size: cover;
+  /*background-size: cover;*/
   color: #ccc;
   font-size: 14px;
 
@@ -147,6 +147,12 @@ body {
   background: #eee;
   border: 10px solid black;
   overflow: scroll;
+  -webkit-transition: color 2s; /* For Safari 3.0 to 6.0 */
+  transition: color 2s; /* For modern browsers */
+}
+
+.chat-pane.clear-chat {
+  color: #FFFFFF;
 }
 
 .chat-input {
@@ -174,7 +180,7 @@ body {
 }
 
 .bot-message {
-  padding: 2px 20px;
+  padding: 2px 12px;
   color: #000;
 }
 
