@@ -105,24 +105,26 @@ html, body {
 
 body {
   background: url(../images/corp-stock2.jpg);
-  /*background-size: cover;*/
+  background-size: cover;
   color: #ccc;
   font-size: 14px;
 
 }
 
 #chatbot {
-  margin: 20px;
+  /*margin: 20px;*/
   width: 100%;
 }
 
 #chat {
   color: #000;
-  display: inline-flex;
+  /*display: inline-flex;*/
 	flex-flow: row wrap;
   height: 600px;
   width: 90%;
-  margin: 0 5%;
+  margin: 0 auto;
+  max-width: 900px;
+  margin-top: 2em;
 }
 
 .header {
@@ -133,10 +135,16 @@ body {
   background-size: 50px 50px;
   background-repeat: no-repeat;
   background-position-y: center;
-  background-position-x: calc(0% + 10px);
+  background-position-x: calc(0% + 25px);
   border-radius: 12px 12px 0 0;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 1px;
+}
+
+.header h1 {
+  display: inline-block;
+  letter-spacing: 0.08em;
+  margin-left: 1em;
 }
 
 .chat-pane {
@@ -186,8 +194,10 @@ body {
 
 .mod-message {
   background: #FF0000;
-  padding: 2px 20px;
-  color: #000;
+  padding: 2px 12px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 

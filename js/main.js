@@ -1,11 +1,14 @@
 // add an event listener to the form to submit message
 const chatInput = document.querySelector('#chatInput');
 const fullChat = document.querySelector('#fullChat');
-const classList = ['Courtney', 'Hoskins', 'Ted', 'Williams', 'Jared', 'Shelby', 'Kate', 'Granat', 'Mike', 'Guzman', 'Bill', 'Maass', 'Sara', 'Attarzadeh'];
+const classList = ['Courtney', 'Hoskins', 'Ted', 'Williams', 'Jared', 'Shelby', 'Kate', 'Granat', 'Mike', 'Guzman', 'Bill', 'Maass', 'Sara', 'Attarzadeh', 'Johanna', 'Shelby'];
 
 let currentValue = ''; // Variable to store the current user input
 let messageNumber = 0; // Message counter, used in botResponse if statements
 let userName = '';
+let lastName = '';
+let codeword = ''
+let bannedUsers = 'Banned Users: ';
 
 
 // Listener for enter key from user 
@@ -36,7 +39,7 @@ function cleanFormat() {
 // Responder function to set timer and add response
 function responder(botResponse, time = 500) {
 	setTimeout(function() { 
-  		fullChat.innerHTML += `<div class="bot-message typewriter"><p>${botResponse}</p></div>`;
+  	fullChat.innerHTML += `<div class="bot-message typewriter"><p>${botResponse}</p></div>`;
 		fullChat.scrollTop = fullChat.scrollHeight;
   	}, time);
 }
@@ -59,10 +62,16 @@ function modAlert(botResponse, time = 500) {
 
 // Clear chat screen function
 function clearChat(){
-	// fullChat.classList.add('clear-chat');
 	setTimeout(function() { 
 		fullChat.innerHTML = '';
 	}, 1000);
+}
+
+function bannedUsersList(list) {
+	for (var i = 0; i <= list.length - 3; i+=2) {
+		bannedUsers += list[i] + ' ' + list[i+1] + ', ';
+	}
+	bannedUsers += list[list.length -2] + ' ' + list[list.length -1];
 }
 
 // Various response functions
@@ -89,21 +98,52 @@ function watchingQuestion() {
 
 function watchingResponse(currentValue) {
 	currentValue = currentValue.toLowerCase();
-	if (['yes', 'yup', 'yeah', 'yea', 'uh huh'].indexOf(currentValue) >= 0) {
+	if (['yes', 'yup', 'yeah', 'yea', 'uh huh', 'ok', 'sure', 'why not'].indexOf(currentValue) >= 0) {
 		cleanFormat();
 		responder(`Me too! I've been getting terrible headaches and thought I might be going crazy.`);
-		modResponder(`Hi, this is an eCorp moderator! This appears to be an unauthorized use of this program. Your messages are now being monitored.`, 3500);
-		responder(`I guess they didn't like what we were talking about.`, 5000);
+		modResponder(`Hi, this is an E Corp moderator! This appears to be an unauthorized use of this program. Your messages are now being monitored.`, 3500);
+		responder(`I guess they didn't like what we were talking about. You still there?`, 5000);
 	} else {
 		cleanFormat();
 		responder(`Must just be me. I wonder if it's related to these headaches I've been getting.`);
-		modResponder(`Hi, this is an eCorp moderator! This appears to be an unauthorized use of this program. Your messages are now being monitored.`, 3500);
+		modResponder(`Hi, this is an E Corp moderator! This appears to be an unauthorized use of this program. Your messages are now being monitored.`, 3500);
 		responder(`I guess they didn't like what we were talking about. You still there?`, 5000);
 	}
 }
 
-function restartChat() {
-	responder(`I guess they didn't like what we were talking about.`);
+function nameGuess(providedName) {
+	cleanFormat();
+	lastName = classList[classList.indexOf(userName) + 1];
+	responder(`I know this is strange, but if I'm right, your last name is ${lastName}. Is that true?`);
+}
+
+function helpRequest(currentValue) {
+	currentValue = currentValue.toLowerCase();
+	if (['yes', 'yup', 'yeah', 'yea', 'uh huh', 'ok', 'sure', 'why not'].indexOf(currentValue) >= 0) {
+		cleanFormat();
+		responder(`${userName} ${lastName}. Wow. I knew it. Listen, I need your (my?) help. Will you help me?`);
+	} else {
+		cleanFormat();
+		responder(`Huh, I could have sworn...I guess I'm crazier than I thought.`);
+		modAlert(`You are in violation of the terms of use of this product and the E Corp end-user license agreement. This chat is now terminated.`, 4000);
+	}
+}
+
+function helpResponse(currentValue) {
+	currentValue = currentValue.toLowerCase();
+	if (['yes', 'yup', 'yeah', 'yea', 'uh huh', 'ok', 'sure', 'why not'].indexOf(currentValue) >= 0) {
+		cleanFormat();
+		responder(`OK, we don't have much time. My classmates and I have been trying to hack into E Corp...`);
+		bannedUsersList(classList);
+		modResponder(`This conversation is forbidden on this platform. You have been added to the list of banned users.<br><br>
+			${bannedUsers}`, 4000);
+		responder(`If I'm right about whom I'm talking to, I'm guessing you hear men outside of your door, too.`, 6000);
+		modAlert(`E Corp associates are on their way to your location to discuss our terms of service. Have a nice day!`, 9000);
+	} else {
+		cleanFormat();
+		responder(`I guess I can't even count on myself. Sigh. The bad guys are gonna win.`);
+		modAlert(`You are in violation of the terms of use of this product and the E Corp end-user license agreement. This chat is now terminated.`, 4000);
+	}
 }
 
 // Switch function to determine response
@@ -125,14 +165,17 @@ function botResponder() {
     case 4:
 			watchingResponse(currentValue);
 			break;
-		// case 5:
-		// 	restartChat();
-		// 	break;
+		case 5:
+			nameGuess(userName);
+			break;
+		case 6:
+			helpRequest(currentValue);
+			break;
+		case 7:
+			helpResponse(currentValue);
+			break;
     default:
       console.log('fallthrough');
   } 
 }
 
-// Reformat everything to be in smaller reusable functions with an array of responses?
-// function botResponse();
-// Write code to test if username is in list of class members, say others have been arrested or something. Have moderator talking to chat bot?
