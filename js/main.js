@@ -6,7 +6,6 @@ let currentValue = ''; // Variable to store the current user input
 let messageNumber = 0; // Message counter, used in botResponse if statements
 let userName = '';
 let lastName = '';
-let codeword = '';
 let bannedUsers = 'Banned Users: ';
 
 
