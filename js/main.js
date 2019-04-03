@@ -1,4 +1,3 @@
-// add an event listener to the form to submit message
 const chatInput = document.querySelector('#chatInput');
 const fullChat = document.querySelector('#fullChat');
 const classList = ['Courtney', 'Hoskins', 'Ted', 'Williams', 'Jared', 'Shelby', 'Kate', 'Granat', 'Mike', 'Guzman', 'Bill', 'Maass', 'Sara', 'Attarzadeh'];
