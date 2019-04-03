@@ -1,7 +1,7 @@
 // add an event listener to the form to submit message
 const chatInput = document.querySelector('#chatInput');
 const fullChat = document.querySelector('#fullChat');
-const classList = ['Courtney', 'Hoskins', 'Ted', 'Williams', 'Jared', 'Shelby', 'Kate', 'Granat', 'Mike', 'Guzman', 'Bill', 'Maass', 'Sara', 'Attarzadeh', 'Johanna', 'Shelby'];
+const classList = ['Courtney', 'Hoskins', 'Ted', 'Williams', 'Jared', 'Shelby', 'Kate', 'Granat', 'Mike', 'Guzman', 'Bill', 'Maass', 'Sara', 'Attarzadeh'];
 
 let currentValue = ''; // Variable to store the current user input
 let messageNumber = 0; // Message counter, used in botResponse if statements
